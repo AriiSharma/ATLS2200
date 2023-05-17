@@ -1,12 +1,12 @@
 # ATLS2200
 
-# Projects
+Projects
 
 *
 *
 *
 
-# In-Class Assignments
+In-Class Assignments
 
 *
 *
@@ -24,7 +24,7 @@
 *
 *
 
-# Weekly Assignments
+Weekly Assignments
 
 *
 *
