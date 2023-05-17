@@ -1,6 +1,6 @@
 # ATLS2200
 
-** Projects **
+**Projects
 
 *
 *
