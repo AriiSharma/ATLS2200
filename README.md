@@ -1,4 +1,4 @@
-# ATLS2200.github.io
+# https://ariisharma.github.io/ATLS2200/
 
 **Projects**
 
