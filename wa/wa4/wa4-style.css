@@ -23,25 +23,22 @@ html {
 .card header {
   background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0));
   border-radius: 1.5em 1.5em 0 0;
+  height: 3em;
+  padding: 1em;
 }
 
 /* Card footer */
 .card footer {
   background-image: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0.1));
   border-radius: 0 0 1.5em 1.5em;
+  height: 3em;
+  padding: 1em;
 }
 
 /* Image in the card */
 .card article img {
   max-height: 100%;
   float: right;
-}
-
-/* Card header and footer height */
-.card header,
-.card footer {
-  height: 3.75em;
-  padding: 1em;
 }
 
 /* Reset margin for <h2> and <p> elements */
@@ -51,22 +48,19 @@ h2, p {
 
 /* Main business card content */
 .card article {
-  height: 15em;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: #fff;
-  padding-left: 1em;
-  padding-top: em;
+  height: 12em;
+  background-color: rgba(0, 0, 0, 0.2);
   
 }
 
 /* <h2> in the header */
 .card header h2 {
   font-size: 2em;
-  line-height: 3.75em;
+  line-height: 2em;
 }
 
 /* <p> in the footer */
 .card footer p {
   font-size: 1.5em;
-  line-height: 3.75em;
+  line-height: 2em;
 }
