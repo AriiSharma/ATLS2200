@@ -6,6 +6,34 @@ const answerBtnClick = answerButton.addEventListener ('click', newTrivia);
 
 const endpoint = "https://trivia.cyberwisp.com/getrandomchristmasquestion";
 
+var jsonData = "" ;
+
+async function newTrivia() {
+    //console.log("BUTTON PRESSED!");
+ 
+    const answerArea = document.querySelector("#js-answer-text");
+    answerArea.textContent = "";
+
+    try {
+        var response = await fetch(endpoint);
+        if ("response.ok") {
+            throw Error(response.statusText)
+        }
+
+        jsonData = await response.json();
+
+        const quoteText = jsonData("question");
+        const quoteArea = document.querySelector("#js-quote-text");
+        quoteArea.textContent = quoteText;
+    }
+
+
+catch(err) {
+    console.log(err)
+    alert("Failed!");
+   }
+ 
+ }
 async function newQuestion() {
     const output = await newTrivia();
     console.log(output);
@@ -23,32 +51,6 @@ async function giveAnswer() {
     const answerArea = document.querySelector("#js-answer-text");
     answerArea.textContent = quoteText;
 }
-
-async function newTrivia() {
-    //console.log("BUTTON PRESSED!");
- 
-    try {
-    const response = await fetch(endpoint);
-    if(!response.ok) {
-     throw Error(response.statusText)
-    }
-    //console.log(response);
- 
-    const jsonData = await response.json();
- 
-    //console.log(jsonData['question']);
-    //console.log(jsonData['answer']);
- 
-    return(jsonData);
-}
-
-catch(err) {
-    console.log(err)
-    alert("Failed!");
-   }
- 
- }
-
 
 
 
