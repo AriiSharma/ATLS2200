@@ -1,56 +1,47 @@
 const questionButton = document.querySelector('#js-new-quote');
-const questionBtnClick = questionButton.addEventListener ('click', newTrivia);
+questionButton.addEventListener('click', newTrivia);
 
-const answerButton = document.querySelector('#js-answer-text');
-const answerBtnClick = answerButton.addEventListener ('click', newTrivia);
+const answerButton = document.querySelector('#js-tweet');
+answerButton.addEventListener('click', giveAnswer);
 
 const endpoint = "https://trivia.cyberwisp.com/getrandomchristmasquestion";
 
-var jsonData = "" ;
+let currentTrivia = null;
 
 async function newTrivia() {
-    //console.log("BUTTON PRESSED!");
- 
-    const answerArea = document.querySelector("#js-answer-text");
-    answerArea.textContent = "";
+  const answerArea = document.querySelector("#js-answer-text");
+  answerArea.textContent = "";
 
-    try {
-        var response = await fetch(endpoint);
-        if ("response.ok") {
-            throw Error(response.statusText)
-        }
-
-        jsonData = await response.json();
-
-        const quoteText = jsonData("question");
-        const quoteArea = document.querySelector("#js-quote-text");
-        quoteArea.textContent = quoteText;
+  try {
+    const response = await fetch(endpoint);
+    if (!response.ok) {
+      throw new Error(response.statusText);
     }
 
+    const jsonData = await response.json();
 
-catch(err) {
-    console.log(err)
-    alert("Failed!");
-   }
- 
- }
-async function newQuestion() {
-    const output = await newTrivia();
-    console.log(output);
+    currentTrivia = jsonData;
 
-    const quoteText = output["question"];
+    const quoteText = currentTrivia.question;
     const quoteArea = document.querySelector("#js-quote-text");
     quoteArea.textContent = quoteText;
+  } catch (err) {
+    console.log(err);
+    alert("Failed to fetch trivia question!");
+  }
 }
 
-async function giveAnswer() {
-    const output = await newTrivia();
-    console.log(output);
-
-    const answerText = output["answer"];
+function giveAnswer() {
+  if (currentTrivia) {
+    const answerText = currentTrivia.answer;
     const answerArea = document.querySelector("#js-answer-text");
-    answerArea.textContent = quoteText;
+    answerArea.textContent = answerText;
+  } else {
+    alert("No trivia question available. Click 'Generate a new bit of trivia!' to get a question.");
+  }
 }
+
+
 
 
 
