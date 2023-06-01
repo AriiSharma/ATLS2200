@@ -1,47 +1,65 @@
-const questionButton = document.querySelector('#js-new-quote');
-questionButton.addEventListener('click', newSong);
-
-const answerButton = document.querySelector('#js-answer-text');
-answerButton.addEventListener('click', showLyrics);
-
-const endpoint = "https://genius-song-lyrics1.p.rapidapi.com/search/?q=%3CREQUIRED%3E&per_page=10&page=1";
-const options = {
-	method: 'GET',
-	headers: {
-		'X-RapidAPI-Key': 'f6ce7afa25msh9fd81ad9ad2783cp1fb93djsnd5c018cfa8cf',
-		'X-RapidAPI-Host': 'genius-song-lyrics1.p.rapidapi.com'
-	}
-};
-
-async function fetchSong() {
-    try {
-        const response = await fetch(endpoint, options);
+document.addEventListener("DOMContentLoaded", function () {
+    const apiUrl = "https://opentdb.com/api.php?amount=20&category=9&difficulty=medium&type=boolean";
+    const questionContainer = document.getElementById("question");
+    const trueButton = document.getElementById("true-btn");
+    const falseButton = document.getElementById("false-btn");
+    const resultContainer = document.getElementById("result");
+    const scoreContainer = document.getElementById("score");
+  
+    let questions = [];
+    let currentQuestionIndex = 0;
+    let score = 0;
+  
+    trueButton.addEventListener("click", handleAnswer);
+    falseButton.addEventListener("click", handleAnswer);
+  
+    async function fetchQuizQuestions() {
+      try {
+        const response = await fetch(apiUrl);
         if (!response.ok) {
-            throw new Error(response.statusText);
+          throw new Error("Failed to fetch quiz questions");
         }
-
-        const jsonData = await response.json();
-        return jsonData;
-    } catch (error) {
-        console.error(error);
-        throw error;
+        const data = await response.json();
+        questions = data.results;
+        displayQuestion();
+      } catch (error) {
+        console.log(error);
+        alert("Failed to fetch quiz questions");
+      }
     }
-}
-
-async function newSong() {
-    const output = await fetchSong();
-    console.log(output);
-     
-    const quoteText = output["question"]; // Replace "question" with the appropriate key from the API response
-    const quoteArea = document.querySelector("#js-quote-text");
-    quoteArea.textContent = quoteText;
-}
-
-async function showLyrics() {
-    const output = await fetchSong();
-    console.log(output);
-
-    const answerText = output["answer"]; // Replace "answer" with the appropriate key from the API response
-    const answerArea = document.querySelector("#js-answer-text");
-    answerArea.textContent = answerText;
-}
+  
+    function displayQuestion() {
+      if (currentQuestionIndex < questions.length) {
+        const currentQuestion = questions[currentQuestionIndex];
+        questionContainer.textContent = currentQuestion.question;
+      } else {
+        showFinalScore();
+      }
+    }
+  
+    function handleAnswer(event) {
+      const selectedAnswer = event.target.id === "true-btn" ? "True" : "False";
+      const currentQuestion = questions[currentQuestionIndex];
+  
+      if (selectedAnswer === currentQuestion.correct_answer) {
+        score++;
+        resultContainer.textContent = "Correct!";
+      } else {
+        resultContainer.textContent = "Incorrect!";
+      }
+  
+      currentQuestionIndex++;
+      displayQuestion();
+    }
+  
+    function showFinalScore() {
+      const percentage = (score / questions.length) * 100;
+      scoreContainer.textContent = `Your final score: ${score}/${questions.length} (${percentage}%)`;
+      resultContainer.textContent = "";
+      trueButton.disabled = true;
+      falseButton.disabled = true;
+    }
+  
+    fetchQuizQuestions();
+  });
+  

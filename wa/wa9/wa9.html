@@ -4,26 +4,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>True/False Quiz</title>
     <link rel="stylesheet" href="wa9-styles.css">
-    <title>Song and Lyrics Generator</title>
 </head>
 <body>
-    <div class="app">
-        <header>Random Song and Lyrics Generator</header>
-        <section class="quotes">
-          <div class="quote-text" id="js-quote-text"></div>
-          <div class="quote-text" id="js-answer-text"></div>
-        </section>
-        <section class="controls" >
-          <button type="button" id="js-new-quote" class="new-quote button">
-            Generate a new song!
-          </button>
-          <button type="button" id="js-tweet" class="twitter button">
-            Show me the lyrics!
-          </button>
-          <!-- <a class="answer button" id="js-tweet" target="_blank" rel="noreferrer">Show me the answer!</a> -->
-        </section>
-      </div>
-      <script src="wa9.js"></script>
+    <h1>True/False Quiz</h1>
+    <div id="quiz-container">
+        <div id="question"></div>
+        <div id="options">
+            <button id="true-btn" class="option-btn">True</button>
+            <button id="false-btn" class="option-btn">False</button>
+        </div>
+        <div id="result"></div>
+        <div id="score"></div>
+    </div>
+    <script src="wa9.js"></script>
 </body>
 </html>
+
+
