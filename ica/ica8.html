@@ -2,6 +2,37 @@
 <html>
 <head>
     <title>Change Page Color</title>
+
+    <style>
+        .msgBox {
+            width: 242px;
+            padding: 10px;
+            border: 1px solid black;
+            background-color: #fff;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .msgBox p {
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+        }
+
+        .msgBox button {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            padding: 0;
+            border: none;
+            background-color: transparent;
+            font-size: 20px;
+            cursor: pointer;
+        }
+    </style>
+
     <script>
         function changeColor() {
             var color = prompt("What color would you like to change the page? ");
@@ -11,12 +42,50 @@
         function resetColor() {
             document.body.style.backgroundColor = "";
         }
+
+        function displayMessage(msgText, msgType) {
+            const body = document.body;
+
+            const panel = document.createElement("div");
+            panel.setAttribute("class", "msgBox");
+            body.appendChild(panel);
+
+            const msg = document.createElement("p");
+            msg.textContent = msgText;
+            panel.appendChild(msg);
+
+            const closeBtn = document.createElement("button");
+            closeBtn.textContent = "x";
+            panel.appendChild(closeBtn);
+
+            closeBtn.addEventListener("click", () =>
+                panel.parentNode.removeChild(panel)
+            );
+        }
     </script>
+
 </head>
+
 <body>
     <h1>Change Your Page Color</h1>
     <button onclick="changeColor()">Change Color</button>
     <button onclick="resetColor()">Reset Color</button>
+
+    <script>
+        const btn = document.createElement("button");
+        btn.textContent = "Show Message";
+        document.body.appendChild(btn);
+
+        btn.addEventListener("click", () => {
+            displayMessage("This is a custom message!", "warning");
+        });
+    </script>
+
+    <div class="msgBox">
+        <p>This is a message box</p>
+        <button>x</button>
+    </div>
 </body>
 </html>
+
 
