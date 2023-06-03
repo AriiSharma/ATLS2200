@@ -1,0 +1,39 @@
+.background-container {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .background-image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  
+  .overlay {
+    position: absolute;
+    top: 0;
+    width: 30%; /* Adjust the width as desired */
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .left {
+    left: 0;
+  }
+  
+  .right {
+    right: 0;
+  }
+  
+  .overlay:hover {
+    opacity: 1;
+  }
+  
+  .image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  
+  

@@ -1,0 +1,61 @@
+.container {
+  position: relative;
+  width: 400px;
+  height: 600px;
+  margin: 0 auto;
+  background-color: #f8f8f8;
+  overflow: hidden;
+}
+
+.volumizer {
+  position: absolute;
+  left: 50px;
+  top: 250px;
+  width: 50px;
+  height: 50px;
+  background-color: #ff7f50;
+  border-radius: 50%;
+  transition: transform 0.2s;
+}
+
+.score {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.game-over {
+  position: absolute;
+  top: 200px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 32px;
+  font-weight: bold;
+  color: red;
+}
+
+.distractor {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  background-color: #ff0000;
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: distract 1s linear infinite;
+}
+
+@keyframes distract {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+  

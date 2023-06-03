@@ -1,43 +1,56 @@
 let volume = 50;
-let birdPosition = 50;
+let birdPositionX = 50;
+let birdPositionY = 50;
 const volumeLevel = document.querySelector('.volume-level');
 const bird = document.querySelector('#bird');
 const message = document.querySelector('#message');
+const gameArea = document.querySelector('.game-area');
+let isDragging = false;
 
-document.addEventListener('mousemove', handleMouseMove);
+gameArea.addEventListener('mousedown', handleMouseDown);
+gameArea.addEventListener('mousemove', handleMouseMove);
+gameArea.addEventListener('mouseup', handleMouseUp);
+
+function handleMouseDown() {
+  isDragging = true;
+}
 
 function handleMouseMove(event) {
-  const gameArea = document.querySelector('.game-area');
-  const gameAreaHeight = gameArea.clientHeight;
-  const gameAreaTop = gameArea.offsetTop;
-  const mouseY = event.clientY - gameAreaTop;
+  if (isDragging) {
+    const gameAreaWidth = gameArea.clientWidth;
+    const gameAreaHeight = gameArea.clientHeight;
+    const mouseX = event.clientX - gameArea.offsetLeft;
+    const mouseY = event.clientY - gameArea.offsetTop;
 
-  if (mouseY > birdPosition && mouseY < gameAreaHeight - birdPosition) {
-    bird.style.top = mouseY + 'px';
+    if (mouseX >= 0 && mouseX <= gameAreaWidth && mouseY >= 0 && mouseY <= gameAreaHeight) {
+      bird.style.left = mouseX + 'px';
+      bird.style.top = mouseY + 'px';
+      adjustVolume(mouseY, gameAreaHeight);
+    }
   }
 }
 
-function changeVolume(action) {
-  if (action === 'increase') {
-    if (volume < 100) {
-      volume += 10;
-      displayMessage(`Volume increased to ${volume}%!`, 'success');
-    } else {
-      displayMessage("Oops, I can't increase the volume anymore!", 'error');
-    }
-  } else if (action === 'decrease') {
-    if (volume > 0) {
-      volume -= 10;
-      displayMessage(`Volume decreased to ${volume}%!`, 'success');
-    } else {
-      displayMessage("Oops, I can't decrease the volume anymore!", 'error');
-    }
-  }
+function handleMouseUp() {
+  isDragging = false;
+}
 
-  volumeLevel.textContent = `Volume Level: ${volume}%`;
+function adjustVolume(mouseY, gameAreaHeight) {
+  const maxVolume = 100;
+  const minVolume = 0;
+  const maxPosition = gameAreaHeight;
+  const minPosition = 0;
 
-  if (volume === 0 || volume === 100) {
-    endGame();
+  const volumePercentage = Math.round(((mouseY - minPosition) / (maxPosition - minPosition)) * (maxVolume - minVolume) + minVolume);
+
+  volumeLevel.textContent = `Volume Level: ${volumePercentage}%`;
+  volume = volumePercentage;
+}
+
+function submitVolume() {
+  if (volume > 0 && volume < 100) {
+    displayMessage(`Volume submitted: ${volume}%`, 'success');
+  } else {
+    displayMessage('Volume must be between 1% and 99%', 'error');
   }
 }
 
@@ -53,10 +66,11 @@ function displayMessage(msg, type) {
   }, 2000);
 }
 
-function endGame() {
-  displayMessage('Game Over!', 'error');
-  document.removeEventListener('mousemove', handleMouseMove);
-}
+
+
+
+
+  
 
 
 

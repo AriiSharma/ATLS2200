@@ -3,20 +3,23 @@
 <head>
   <link rel="stylesheet" type="text/css" href="volume.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-JSvEQW54Zekg+0J/6phHJHrBmMxJbd5fFMe+Q51w1fJnFGXng2TMDyvLe8R6J5VtxIQ0eW1mYFJZSvPnvnse+Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
 </head>
 <body>
   <div class="container">
-    <h1>Cute Volumizer Game</h1>
+    <h1>Volume Control</h1>
     <div class="volume-level">Volume Level: 50%</div>
-    <div class="game-area">
+    <div class="game-area" onmousemove="handleMouseMove(event)" onmouseup="handleMouseUp(event)">
       <div id="bird"></div>
     </div>
     <div id="message"></div>
+    <button onclick="submitVolume()">Submit Volume</button>
   </div>
-  
-  
+
   <script src="volume.js"></script>
 </body>
 </html>
+
+
+
+
 
